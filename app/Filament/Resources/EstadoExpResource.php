@@ -2,9 +2,9 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\PropietarioResource\Pages;
-use App\Filament\Resources\PropietarioResource\RelationManagers;
-use App\Models\Propietario;
+use App\Filament\Resources\EstadoExpResource\Pages;
+use App\Filament\Resources\EstadoExpResource\RelationManagers;
+use App\Models\EstadoExp;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -13,12 +13,11 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class PropietarioResource extends Resource
+class EstadoExpResource extends Resource
 {
-    protected static ?string $model = Propietario::class;
+    protected static ?string $model = EstadoExp::class;
 
-    //modificar el ícono del menu desde el sitio https://heroicons.com/
-    protected static ?string $navigationIcon = 'heroicon-o-user';
+    protected static ?string $navigationIcon = 'heroicon-o-check-circle';
 
     public static function form(Form $form): Form
     {
@@ -57,6 +56,10 @@ class PropietarioResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                // delete action agregado
+                Tables\Actions\DeleteAction::make(),
+                // fin delete action agregado
+
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -75,9 +78,9 @@ class PropietarioResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListPropietarios::route('/'),
-            'create' => Pages\CreatePropietario::route('/create'),
-            'edit' => Pages\EditPropietario::route('/{record}/edit'),
+            'index' => Pages\ListEstadoExps::route('/'),
+            'create' => Pages\CreateEstadoExp::route('/create'),
+            'edit' => Pages\EditEstadoExp::route('/{record}/edit'),
         ];
     }
 }
