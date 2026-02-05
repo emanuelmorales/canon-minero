@@ -11,4 +11,5 @@ class Localidad extends Model
     protected $fillable = [
         'nombre',
     ];
+    protected $table = 'localidades';
 }
