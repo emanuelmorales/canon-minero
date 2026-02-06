@@ -20,6 +20,12 @@ class MinaResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-home-modern';
 
+    // Pone el recurso bajo un grupo de navegación llamado "Datos Auxiliares"
+    protected static ?string $navigationGroup = 'Datos Auxiliares';
+
+    // orden en el que aparece en el menú
+    protected static ?int $navigationSort = 2;
+
     public static function form(Form $form): Form
     {
         return $form

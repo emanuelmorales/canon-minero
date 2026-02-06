@@ -20,6 +20,12 @@ class PropietarioResource extends Resource
     //modificar el ícono del menu desde el sitio https://heroicons.com/
     protected static ?string $navigationIcon = 'heroicon-o-user';
 
+    // Pone el recurso bajo un grupo de navegación llamado "Datos Auxiliares"
+    protected static ?string $navigationGroup = 'Datos Auxiliares';
+
+    // orden en el que aparece en el menú
+    protected static ?int $navigationSort = 7;
+
     public static function form(Form $form): Form
     {
         return $form

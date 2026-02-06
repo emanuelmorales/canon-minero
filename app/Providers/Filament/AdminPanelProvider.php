@@ -33,7 +33,8 @@ class AdminPanelProvider extends PanelProvider
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
             ->pages([
-                Pages\Dashboard::class,
+                // oculta el Home de la lista de páginas en el menu
+                // Pages\Dashboard::class,
             ])
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
             ->widgets([
@@ -51,6 +52,10 @@ class AdminPanelProvider extends PanelProvider
                 DisableBladeIconComponents::class,
                 DispatchServingFilamentEvent::class,
             ])
+            ->topNavigation()
+            // ->brandName('Pago de Canon Minero - JAM')
+            ->brandLogo(asset('images/logo-jam-2026.png')) // <--- Ruta a tu imagen
+            ->brandLogoHeight('3rem') // <--- Opcional: Ajusta la altura (CSS) para que se vea bien
             ->authMiddleware([
                 Authenticate::class,
             ]);

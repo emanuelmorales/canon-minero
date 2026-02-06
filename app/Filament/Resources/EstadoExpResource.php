@@ -19,6 +19,15 @@ class EstadoExpResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-check-circle';
 
+    // Pone el recurso bajo un grupo de navegación llamado "Datos Auxiliares"
+    protected static ?string $navigationGroup = 'Datos Auxiliares';
+
+    // label en el que aparece en el menú
+    protected static ?string $navigationLabel = 'Estado del Expte.';
+
+    // orden en el que aparece en el menú
+    protected static ?int $navigationSort = 4;
+
     public static function form(Form $form): Form
     {
         return $form

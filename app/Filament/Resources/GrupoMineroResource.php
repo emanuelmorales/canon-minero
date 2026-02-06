@@ -18,6 +18,15 @@ class GrupoMineroResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-user-group';
 
+    // Pone el recurso bajo un grupo de navegación llamado "Datos Auxiliares"
+    protected static ?string $navigationGroup = 'Datos Auxiliares';
+
+    // label en el que aparece en el menú
+    protected static ?string $navigationLabel = 'Grupo Minero';
+
+    // orden en el que aparece en el menú
+    protected static ?int $navigationSort = 3;
+
     public static function form(Form $form): Form
     {
         return $form

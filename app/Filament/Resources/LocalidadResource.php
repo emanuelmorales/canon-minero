@@ -19,6 +19,14 @@ class LocalidadResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-building-office';
 
+    // Pone el recurso bajo un grupo de navegación llamado "Datos Auxiliares"
+    protected static ?string $navigationGroup = 'Datos Auxiliares';
+
+    // label en el que aparece en el menú
+    protected static ?string $navigationLabel = 'Localidades';
+
+    protected static ?int $navigationSort = 5;
+
     public static function form(Form $form): Form
     {
         return $form
