@@ -24,6 +24,7 @@ class Pago extends Model
         'anioPago',
         'monto',
         'detalle',
+        'archivo_adjunto',
     ];
 
     //############ MUY IMPORTANTE AGREGAR ESTE CÓDIGO, SINO NO FUNCIONA ############

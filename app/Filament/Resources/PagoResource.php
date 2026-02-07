@@ -15,7 +15,8 @@ use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
-
+use Filament\Forms\Components\FileUpload;
+use Filament\Tables\Columns\TextColumn;
 
 class PagoResource extends Resource
 {
@@ -101,6 +102,26 @@ class PagoResource extends Resource
                 Forms\Components\TextInput::make('detalle')
                     ->label('Detalle del Pago')
                     ->columnSpanFull(),
+                Forms\Components\FileUpload::make('archivo_adjunto')
+                    ->label('Adjunto (PDF)')
+                    ->directory('comprobantes-pagos') // Carpeta donde se guardarán en storage/app/public
+                    // ->acceptedFileTypes(['application/pdf']) // Solo acepta PDF
+                    // ->maxSize(2048) // 2MB en Kilobytes (2 * 1024)
+                    ->acceptedFileTypes([
+                        'application/pdf',
+                        // Tipos para ZIP
+                        // 'application/zip',
+                        // 'application/x-zip-compressed',
+                        // 'multipart/x-zip',
+                        // Tipos para RAR
+                        // 'application/vnd.rar',
+                        // 'application/x-rar-compressed',
+                        // 'application/x-rar',
+                    ])
+                    ->maxSize(51200) // 50MB
+                    ->downloadable() // Permite descargar el archivo al editar
+                    ->openable() // Permite abrirlo en una pestaña nueva
+                    ->columnSpanFull(), // Opcional: Para que ocupe todo el ancho
             ])->columns(4);
     }
 
@@ -195,6 +216,13 @@ class PagoResource extends Resource
                             ->label('Total') // Etiqueta que aparecerá antes del número
                             ->money('ARS')   // Importante: Dale formato de moneda también al total
                     ),
+                Tables\Columns\TextColumn::make('archivo_adjunto')
+                    ->label('Archivo')
+                    ->formatStateUsing(fn($state) => $state ? 'Ver' : 'Sin archivo')
+                    ->icon(fn($state) => $state ? 'heroicon-m-paper-clip' : '')
+                    ->color(fn($state) => $state ? 'primary' : 'gray')
+                    ->url(fn($record) => $record->archivo_adjunto ? asset('storage/' . $record->archivo_adjunto) : null)
+                    ->openUrlInNewTab(), // Abre el PDF en otra pestaña al hacer clic
                 Tables\Columns\TextColumn::make('created_at')
                     ->label('Creado')
                     ->dateTime('d/m/y H:i')
